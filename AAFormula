@@ -1,0 +1,50 @@
+def calculate_bmr(weight, height, age, gender):
+    """Calculates the Basal Metabolic Rate (BMR) using the Mifflin-St Jeor Equation."""
+    if gender == 'Male':
+        return 10 * weight + 6.25 * height - 5 * age + 5
+    else:
+        return 10 * weight + 6.25 * height - 5 * age - 161
+
+def calculate_daily_calories(bmr, workout_days, workout_duration, workout_intensity):
+    """Calculates daily calories needs, adjusting for physical activity."""
+    MET_values = {'Light': 3.5, 'Moderate': 5, 'Vigorous': 7}
+    met = MET_values.get(workout_intensity, 3.5)  # Default to light if unspecified
+    additional_calories = met * weight * (workout_duration / 60) * workout_days
+    total_weekly_calories = bmr * 7 + additional_calories  # BMR for a week + additional from workouts
+    return total_weekly_calories / 7  # Average daily calories
+
+def protein_and_amino_acid_needs(daily_calories):
+    """Estimates daily protein needs and hypothetical amino acid distribution from total protein."""
+    protein_grams = daily_calories * 0.15 / 4  # 15% of calories from protein, 4 cal/g of protein
+    amino_acids = {
+        'Histidine': 0.02,
+        'Isoleucine': 0.05,
+        'Leucine': 0.09,
+        'Lysine': 0.08,
+        'Methionine': 0.03,
+        'Phenylalanine': 0.04,
+        'Threonine': 0.04,
+        'Tryptophan': 0.01,
+        'Valine': 0.05
+    }
+    amino_acid_needs = {aa: round(protein_grams * ratio, 2) for aa, ratio in amino_acids.items()}
+    return protein_grams, amino_acid_needs
+
+# Example usage
+weight = 70  # kg
+height = 175  # cm
+age = 30  # years
+gender = 'Male'
+workout_days = 3
+workout_duration = 45  # minutes
+workout_intensity = 'Moderate'
+
+bmr = calculate_bmr(weight, height, age, gender)
+daily_calories = calculate_daily_calories(bmr, workout_days, workout_duration, workout_intensity)
+protein_needs, amino_acid_needs = protein_and_amino_acid_needs(daily_calories)
+
+print(f"Estimated Daily Calorie Needs: {daily_calories:.2f} kcal")
+print(f"Estimated Daily Protein Needs: {protein_needs:.2f} g")
+print("Estimated Daily Amino Acid Needs in grams:")
+for aa, need in amino_acid_needs.items():
+    print(f"  {aa}: {need} g")
