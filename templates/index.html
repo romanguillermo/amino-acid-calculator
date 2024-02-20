@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amino Acid Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <!--User Input Form-->
+    <h1>Amino Acid Calculator Requirements</h1>
+    <form action="/calculate" method="post">
+        <!--Age-->
+        <label for="age">Age:</label>
+        <input type="number" name="age" min='0' max='100' placeholder="Age" required>
+        <!--Gender-->
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="">Please select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+
+        <!--Make dropdown for kg/lb, cm/in-->
+        <!--Weight-->
+        <label for="weight">Weight:</label>
+        <input type="number" id="weight" name="weight" min='1' max="500" placeholder="Weight" required>
+        <input type="radio" id="lb" name="weight_unit" value="lb" checked>
+        <label for="lb">lb</label>
+        <input type="radio" id="kg" name="weight_unit" value="kg">
+        <label for="kg">kg</label>
+        <!--Height: Feet and Inches dropdowns-->
+        <label for="height_feet">Height:</label>
+        <select id="height_feet" name="height_feet" required>
+            <option value="">Feet</option>
+            {% for foot in range(0, 8) %}
+            <option value="{{ foot }}">{{ foot }}</option>
+            {% endfor %}
+        </select>
+        <label>ft</label>
+        <select id="height_inches" name="height_inches" required>
+            <option value="">Inches</option>
+            {% for inch in range(0, 12) %}
+            <option value="{{ inch }}">{{ inch }} in</option>
+            {% endfor %}
+        </select>
+        <label>in</label>
+        <!--Activity-->
+        <label for="activity">Activity Level:</label>
+        <select id="activity" name="activity" required>
+            <option value="">Please select</option>
+            <option value="sedentary">Sedentary</option>
+            <option value="light">Light activity</option>
+            <option value="moderate">Moderate activity</option>
+            <option value="active">Active</option>
+            <option value="very_active">Very active</option>
+        </select>
+        <!--Pregnancy-->
+        <label for="pregnancy">Pregnancy/Breastfeeding Status:</label>
+        <select id="pregnancy" name="pregnancy" required>
+            <option value="none">None</option>
+            <option value="pregnant">Pregnant</option>
+            <option value="breastfeeding">Breastfeeding</option>
+        </select>
+
+        <button type="submit">Calculate</button>
+    </form>
+</body>
+
+</html>
