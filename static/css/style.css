@@ -1,0 +1,15 @@
+body {
+    margin: 10%;
+}
+
+#title {
+    text-align: center;
+}
+
+.custom-form-class {
+    padding: 1rem;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+    max-width: 680px;
+    margin: auto;
+}
