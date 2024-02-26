@@ -46,8 +46,8 @@ def calculate():
         is_pregnant = False
         is_lactating = True
 
-    # Set workout days,duration,intensity based on activity level ?
-    # or set new inputs workout days,duration,intensity
+    # Set workout days,duration,intensity based on the activity level ?
+    # or set new inputs on form: workout days,duration,intensity ?
 
     # Calculation logic using AAFormula module
     protein_needs, amino_acid_needs, total_per_category, total_daily_calories = (
@@ -56,27 +56,21 @@ def calculate():
             height,
             age,
             gender,
-            #workout_days,
-            #workout_duration,
-            #workout_intensity,
+            # workout_days,
+            # workout_duration,
+            # workout_intensity,
             is_pregnant,
-            is_lactating
+            is_lactating,
         )
     )
 
-    print(f"Estimated Daily Calorie Needs: {total_daily_calories:.2f} kcal")
-    print(f"Estimated Daily Protein Needs: {protein_needs:.2f} g")
-    print_amino_acid_needs(amino_acid_needs, total_per_category)
-
+    amino_acid_results = print_amino_acid_needs(amino_acid_needs, total_per_category)
 
     return render_template(
         "results.html",
-        age=age,
-        weight=weight,
-        height=height,
-        gender=gender,
-        activity_level=activity_level,
-        pregnancy_status=pregnancy_status,
+        total_daily_calories=total_daily_calories,
+        protein_needs=protein_needs,
+        amino_acid_results=amino_acid_results,
     )  # Renders results page based on input
 
 
