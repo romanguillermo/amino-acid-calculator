@@ -1,21 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amino Acid Calculator Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}">
 </head>
-
 <body>
-    <div class="container">
-        <h1>Calculation Results</h1>
-        <p>Estimated Daily Calorie Needs: {{ total_daily_calories }} kcal</p>
-        <p>Estimated Daily Protein Needs: {{ protein_needs }} g</p>
-        <p>{{ amino_acid_results|safe }}</p>
+    <div class="container my-5">
+        <h1 class="mb-4">Calculation Results</h1>
         
-        <a href="{{ url_for('index') }}">Back to form</a>
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Daily Calorie Needs</h5>
+                <p class="card-text">Estimated Daily Calorie Needs: {{ total_daily_calories }} kcal</p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Daily Protein Needs</h5>
+                <p class="card-text">Estimated Daily Protein Needs: {{ protein_needs }} g</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Amino Acid Needs</h5>
+                <p class="card-text">{{ amino_acid_results|safe }}</p>
+            </div>
+        </div>
+        
+        <a href="{{ url_for('index') }}" class="btn btn-primary">Back to form</a>
     </div>
 </body>
-
 </html>

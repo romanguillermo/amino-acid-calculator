@@ -46,9 +46,6 @@ def calculate():
         is_pregnant = False
         is_lactating = True
 
-    # Set workout days,duration,intensity based on the activity level ?
-    # or set new inputs on form: workout days,duration,intensity ?
-
     # Calculation logic using AAFormula module
     protein_needs, amino_acid_needs, total_per_category, total_daily_calories = (
         calculate_amino_acid_needs(
