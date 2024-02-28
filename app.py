@@ -51,20 +51,18 @@ def calculate():
 
     # Calculation logic using AAFormula module
     protein_needs, amino_acid_needs, total_per_category, total_daily_calories = (
-        calculate_amino_acid_needs(
+        AminoAcidNeeds.calculate_amino_acid_needs(
             weight,
             height,
             age,
             gender,
-            # workout_days,
-            # workout_duration,
-            # workout_intensity,
+            activity_level,
             is_pregnant,
             is_lactating,
         )
     )
 
-    amino_acid_results = print_amino_acid_needs(amino_acid_needs, total_per_category)
+    amino_acid_results = AAPrinter.print_amino_acid_needs(amino_acid_needs, total_per_category)
 
     return render_template(
         "results.html",
