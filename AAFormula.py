@@ -21,9 +21,9 @@ class AminoAcidNeeds:
         """Calculate daily protein and essential amino acid needs."""
         # Setting variables based on activity level
         workout_days, workout_duration, met_value = 0, 0, 1.2  # Defaults for Sedentary
-        if activity_level == "Moderate":
+        if activity_level == "moderate":
             workout_days, workout_duration, met_value = 3, 45, 4.5
-        elif activity_level == "Active":
+        elif activity_level == "active":
             workout_days, workout_duration, met_value = 5, 60, 6
 
         bmr = BMRCalculator.calculate_bmr(weight, height, age, gender)
@@ -114,6 +114,7 @@ class AAPrinter:
             total_grams = total_per_category[category]
             total_milligrams = total_grams * 1000
             results += f"&nbsp;&nbsp;Total {category}: {total_grams:.2f} g ({total_milligrams:.0f} mg)<br><br>"
+        results += f""
         return results
 
 
@@ -136,9 +137,7 @@ protein_needs, amino_acid_needs, total_per_category, total_daily_calories = (
         height,
         age,
         gender,
-        workout_days,
-        workout_duration,
-        workout_intensity,
+        activity_level,
         is_pregnant,
         is_lactating,
     )
