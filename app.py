@@ -1,3 +1,8 @@
+# Add macros calculator
+# Implement API 
+# Unit testing
+# Python Anywhere deployment
+
 from flask import Flask, render_template, request, redirect, url_for
 from AAFormula import *
 

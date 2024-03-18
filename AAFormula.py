@@ -88,19 +88,6 @@ class AminoAcidNeeds:
         return protein_needs, amino_acid_needs, total_per_category, daily_calories
 
 
-"""
-def print_amino_acid_needs(amino_acid_needs, total_per_category):
-    print("Estimated Daily Amino Acid Needs in grams:\n")
-    for category, needs in amino_acid_needs.items():
-        print(f"{category}:")
-        for aa, need in needs.items():
-            milligrams = need * 1000
-            print(f"  {aa}: {need:.2f} g ({milligrams:.0f} mg)")
-        total_grams = total_per_category[category]
-        total_milligrams = total_grams * 1000
-        print(f"  Total {category}: {total_grams:.2f} g ({total_milligrams:.0f} mg)\n")
-"""
-
 class AAPrinter:
     @staticmethod
     # New print function for displaying html
@@ -116,34 +103,3 @@ class AAPrinter:
             results += f"&nbsp;&nbsp;Total {category}: {total_grams:.2f} g ({total_milligrams:.0f} mg)<br><br>"
         results += f""
         return results
-
-
-"""
-# Example usage
-weight = 70  # kg
-height = 175  # cm
-age = 30  # years
-gender = "Male"
-workout_days = 3
-workout_duration = 45  # minutes
-workout_intensity = "Moderate"
-is_pregnant = False
-is_lactating = False
-
-
-protein_needs, amino_acid_needs, total_per_category, total_daily_calories = (
-    calculate_amino_acid_needs(
-        weight,
-        height,
-        age,
-        gender,
-        activity_level,
-        is_pregnant,
-        is_lactating,
-    )
-)
-
-print(f"Estimated Daily Calorie Needs: {total_daily_calories:.2f} kcal")
-print(f"Estimated Daily Protein Needs: {protein_needs:.2f} g")
-print_amino_acid_needs(amino_acid_needs, total_per_category)
-"""
