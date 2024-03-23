@@ -86,13 +86,24 @@
 
         <!--Pregnancy-->
         <div class="mb-3">
-            <label for="pregnancy" class="form-label">Pregnancy/Breastfeeding Status:</label>
+            <label for="pregnancy" class="form-label">Pregnancy Status:</label>
             <select id="pregnancy" name="pregnancy" class="form-select" required>
                 <option value="none">None</option>
                 <option value="pregnant">Pregnant</option>
                 <option value="breastfeeding">Breastfeeding</option>
             </select>
         </div>
+
+        <!--Goal-->
+        <div class="mb-3">
+            <label for="goal" class="form-label">Goal:</label>
+            <select id="goal" name="goal" class="form-select" required>
+                <option value="">Please select</option>
+                <option value="lose">Lose weight</option>
+                <option value="maintain">Maintain weight</option>
+                <option value="gain">Gain weight</option>
+            </select>
+
         <!--Button-->
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-primary">Calculate</button>

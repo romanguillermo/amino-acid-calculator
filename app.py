@@ -1,12 +1,20 @@
-# Add macros calculator
-# Implement API 
+# Macros Branch Changes:
+# Macros calculator
+# Optimized AAFormula code
 # Unit testing
-# Python Anywhere deployment
+#
+# To do:
+# Implement API
 
+import os
+import requests
 from flask import Flask, render_template, request, redirect, url_for
 from AAFormula import *
 
 app = Flask(__name__)
+
+EDAMAM_APP_ID = os.getenv("EDAMAM_APP_ID")
+EDAMAM_API_KEY = os.getenv("EDAMAM_API_KEY")
 
 
 @app.route("/")
@@ -32,6 +40,7 @@ def calculate():
     gender = request.form.get("gender")
     activity_level = request.form.get("activity")
     pregnancy_status = request.form.get("pregnancy")
+    goal = request.form.get("goal")
 
     # Convert weight to kilograms for calculations if not already
     if weight_unit == "lb":
@@ -51,26 +60,19 @@ def calculate():
         is_pregnant = False
         is_lactating = True
 
-    # Calculation logic using AAFormula module
-    protein_needs, amino_acid_needs, total_per_category, total_daily_calories = (
-        AminoAcidNeeds.calculate_amino_acid_needs(
-            weight,
-            height,
-            age,
-            gender,
-            activity_level,
-            is_pregnant,
-            is_lactating,
-        )
-    )
-
-    amino_acid_results = AAPrinter.print_amino_acid_needs(amino_acid_needs, total_per_category)
+    # Calculations using AAFormula NeedsCalculator
+    needs = NeedsCalculator(weight, height, age, gender, activity_level, is_pregnant, is_lactating)
+    total_daily_calories = needs.calculate_daily_calories()
+    protein_needs = needs.calculate_protein_needs()
+    amino_acid_results = needs.calculate_amino_acid_needs()
+    macros_needs = needs.calculate_macros_needs()
 
     return render_template(
         "results.html",
         total_daily_calories=total_daily_calories,
         protein_needs=protein_needs,
         amino_acid_results=amino_acid_results,
+        macros_needs=macros_needs,
     )  # Renders results page based on input
 
 
