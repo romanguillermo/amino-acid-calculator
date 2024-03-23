@@ -1,6 +1,6 @@
 # Macros Branch Changes:
 # Macros calculator
-# Optimized AAFormula code
+# Optimized NeedsFormula code
 # Unit testing
 #
 # To do:
@@ -9,7 +9,7 @@
 import os
 import requests
 from flask import Flask, render_template, request, redirect, url_for
-from AAFormula import *
+from NeedsFormula import *
 
 app = Flask(__name__)
 
@@ -61,7 +61,7 @@ def calculate():
         is_lactating = True
 
     # Calculations using AAFormula NeedsCalculator
-    needs = NeedsCalculator(weight, height, age, gender, activity_level, is_pregnant, is_lactating)
+    needs = NutritionalNeeds(weight, height, age, gender, activity_level, is_pregnant, is_lactating)
     total_daily_calories = needs.calculate_daily_calories()
     protein_needs = needs.calculate_protein_needs()
     amino_acid_results = needs.calculate_amino_acid_needs()

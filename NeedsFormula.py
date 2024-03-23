@@ -2,8 +2,7 @@
 # Adjust daily calories based on goal
 # Macros needs calculator
 
-
-class NeedsCalculator:
+class NutritionalNeeds:
     def __init__(
         self,
         weight,
