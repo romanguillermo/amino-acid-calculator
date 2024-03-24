@@ -1,22 +1,10 @@
-# Changes:
-# See NeedsFormula.py for calculation class changes
-# Added goal input which should affect calories and macros output
-# Simplified results page to daily calories, macros (protein,fat,carbs), and amino acid needs
-# Prepping for macros calculation
-# Unit testing
-#
 # To do:
-# Implement API
+#
 
-import os
-import requests
 from flask import Flask, render_template, request, redirect, url_for
 from NeedsFormula import *
 
 app = Flask(__name__)
-
-EDAMAM_APP_ID = os.getenv("EDAMAM_APP_ID")
-EDAMAM_API_KEY = os.getenv("EDAMAM_API_KEY")
 
 
 @app.route("/")
@@ -62,7 +50,7 @@ def calculate():
         is_pregnant = False
         is_lactating = True
 
-    # Calculations using AAFormula NeedsCalculator
+    # Calculations using NeedsFormula NeedsCalculator
     needs = NutritionalNeeds(weight, height, age, gender, activity_level, is_pregnant, is_lactating, goal)
     total_daily_calories = needs.calculate_daily_calories()
     macros_needs = needs.calculate_macros_needs()

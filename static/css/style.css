@@ -1,15 +1,31 @@
+
 body {
     margin: 5% 10%;
+    background-color: #121212;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
 }
 
-#title {
+.title {
     text-align: center;
 }
 
 .custom-form-class {
     padding: 1rem;
-    border: 2px solid black;
+    border: 2px solid #fff;
     border-radius: 0.5rem;
     max-width: 550px;
     margin: auto;
+    background-color: #1e1e1e;
+}
+
+
+/* Results page only */
+.container {
+    max-width: 800px;
+}
+
+.card {
+    border: 2px solid #fff; 
+    background-color: #1e1e1e;
 }

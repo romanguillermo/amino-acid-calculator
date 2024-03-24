@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amino Acid Calculator Results</title>
+    <title>Nutrition Results</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container my-5">
-        <h1 class="mb-4">Results</h1>
+        <h1 class="title mb-4">Results</h1>
         
         <div class="card mb-3">
             <div class="card-body">
@@ -32,7 +34,8 @@
         </div>
         
         <div class="container">
-            <h1 class="mb-4">Recipes</h1>
+            <h1 class="title mb-4">Recipes</h1>
+            <div class="card">
             {% for hit in recipes %}
                 <div>
                     <h2>{{ hit.recipe.label }}</h2>
@@ -40,9 +43,12 @@
                     <p><a href="{{ hit.recipe.url }}">Recipe Link</a></p>
                 </div>
             {% endfor %}
+            </div>
         </div>
 
-        <a href="{{ url_for('index') }}" class="btn btn-primary">Back to form</a>
+        <div class="d-flex justify-content-center">
+        <a href="{{ url_for('index') }}" class="btn btn-primary back-button">Back to form</a>
+        </div>
     </div>
 </body>
 </html>
