@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container my-5">
-        <h1 class="mb-4">Calculation Results</h1>
+        <h1 class="mb-4">Results</h1>
         
         <div class="card mb-3">
             <div class="card-body">
@@ -19,8 +19,8 @@
 
         <div class="card mb-3">
             <div class="card-body">
-                <h5 class="card-title">Daily Protein Needs</h5>
-                <p class="card-text">{{ protein_needs }} g</p>
+                <h5 class="card-title">Macronutrient needs</h5>
+                <p class="card-text">{{ macros_needs|safe }}</p>
             </div>
         </div>
 
@@ -28,13 +28,6 @@
             <div class="card-body">
                 <h5 class="card-title">Amino Acid Needs</h5>
                 <p class="card-text">{{ amino_acid_results|safe }}</p>
-            </div>
-        </div>
-
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Macronutrient needs</h5>
-                <p class="card-text">{{ macros_needs }}</p>
             </div>
         </div>
         

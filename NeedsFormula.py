@@ -1,19 +1,11 @@
-# TODO:
+# Changes:
 # Adjust daily calories based on goal
-# Macros needs calculator
+# Write macros needs calculator also based on goal
+# Protein should be part of macros and also depend on goal
+
 
 class NutritionalNeeds:
-    def __init__(
-        self,
-        weight,
-        height,
-        age,
-        gender,
-        activity_level,
-        is_pregnant,
-        is_lactating,
-        goal,
-    ):
+    def __init__(self,weight,height,age,gender,activity_level,is_pregnant,is_lactating,goal):
         self.weight = weight
         self.height = height
         self.age = age
@@ -22,9 +14,9 @@ class NutritionalNeeds:
         self.is_pregnant = is_pregnant
         self.is_lactating = is_lactating
         self.goal = goal
+
         self.bmr = self.calculate_bmr()
         self.daily_calories = self.calculate_daily_calories()
-        self.protein_needs = self.calculate_protein_needs()
 
     def calculate_bmr(self):
         """Calculates the Basal Metabolic Rate (BMR) using the Mifflin-St Jeor Equation."""
@@ -34,30 +26,25 @@ class NutritionalNeeds:
             return 10 * self.weight + 6.25 * self.height - 5 * self.age - 161
 
     def calculate_daily_calories(self):
-        """Adjust daily calories based on workout parameters."""
+        """Calculate daily calories based on workout parameters and goal."""
         workout_days, workout_duration, met_value = 0, 0, 1.2  # Defaults for Sedentary
         if self.activity_level == "moderate":
             workout_days, workout_duration, met_value = 3, 45, 4.5
         elif self.activity_level == "active":
             workout_days, workout_duration, met_value = 5, 60, 6
 
-        daily_calorie_adjustment = (
-            self.bmr / 24 * met_value * (workout_duration / 60) * workout_days
-        )
+        daily_calorie_adjustment = (self.bmr / 24 * met_value * (workout_duration / 60) * workout_days)
         daily_calories = self.bmr + daily_calorie_adjustment
-        return daily_calories
 
-    def calculate_protein_needs(self):
-        """Calculate daily protein needs."""
-        protein_needs = (
-            self.daily_calories * 0.15 / 4
-        )  # 15% of calories from protein, 4 cal/g of protein
-        if self.gender.lower() == "female":
-            if self.is_pregnant:
-                protein_needs += 25
-            if self.is_lactating:
-                protein_needs += 20
-        return protein_needs
+        # Adjust calorie intake based on goal
+        if self.goal == "lose":
+            daily_calories = daily_calories * 0.8  # Decrease calories by 20%
+        elif self.goal == "gain":
+            daily_calories = daily_calories * 1.2  # Increase calories by 20%
+        else:
+            daily_calories = daily_calories  # Maintain calories
+
+        return round(daily_calories, 2)
 
     def calculate_amino_acid_needs(self):
         """Calculate daily amino acid needs."""
@@ -121,6 +108,25 @@ class NutritionalNeeds:
         return amino_acid_results
 
     def calculate_macros_needs(self):
-        """Calculate daily macronutrient needs."""
-        macros = ""
-        return macros
+        """Calculate daily macronutrient needs: protein, fat, and carbohydrates."""
+        # Calculate macronutrient needs
+
+        # Protein needs, modify so it depends on goal as well?
+        protein_needs = (self.daily_calories * 0.15 / 4)  # 15% of calories from protein, 4 cal/g of protein
+        if self.gender == "female":
+            if self.is_pregnant:
+                protein_needs += 25
+            if self.is_lactating:
+                protein_needs += 20
+
+        # Fat needs
+        fat_needs = 0
+
+        # Carbohydrates needs
+        carb_needs = 0
+
+        # Return macros needs in nicely formatted string for html output
+        macros_results = f"Protein: {protein_needs:.2f} g<br>"
+        macros_results += f"Fat: {fat_needs:.2f} g<br>"
+        macros_results += f"Carbohydrates: {carb_needs:.2f} g<br>"
+        return macros_results

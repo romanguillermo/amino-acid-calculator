@@ -1,6 +1,8 @@
-# Macros Branch Changes:
-# Macros calculator
-# Optimized NeedsFormula code
+# Changes:
+# See NeedsFormula.py for calculation class changes
+# Added goal input which should affect calories and macros output
+# Simplified results page to daily calories, macros (protein,fat,carbs), and amino acid needs
+# Prepping for macros calculation
 # Unit testing
 #
 # To do:
@@ -61,18 +63,16 @@ def calculate():
         is_lactating = True
 
     # Calculations using AAFormula NeedsCalculator
-    needs = NutritionalNeeds(weight, height, age, gender, activity_level, is_pregnant, is_lactating)
+    needs = NutritionalNeeds(weight, height, age, gender, activity_level, is_pregnant, is_lactating, goal)
     total_daily_calories = needs.calculate_daily_calories()
-    protein_needs = needs.calculate_protein_needs()
-    amino_acid_results = needs.calculate_amino_acid_needs()
     macros_needs = needs.calculate_macros_needs()
+    amino_acid_results = needs.calculate_amino_acid_needs()
 
     return render_template(
         "results.html",
         total_daily_calories=total_daily_calories,
-        protein_needs=protein_needs,
-        amino_acid_results=amino_acid_results,
         macros_needs=macros_needs,
+        amino_acid_results=amino_acid_results,
     )  # Renders results page based on input
 
 
