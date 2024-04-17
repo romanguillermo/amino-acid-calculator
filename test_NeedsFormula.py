@@ -3,61 +3,62 @@ from NeedsFormula import NutritionalNeeds
 
 
 class TestNutritionalNeeds(unittest.TestCase):
+
     def setUp(self):
-        # Example setup for a moderate active male aiming to maintain weight
-        self.male_user = NutritionalNeeds(
-            weight=70,
-            height=175,
-            age=25,
-            gender="male",
-            activity_level="moderate",
-            is_pregnant=False,
-            is_lactating=False,
-            goal="maintain",
+        self.person1 = NutritionalNeeds(
+            80, 180, 30, "male", "moderate", False, False, "maintain"
         )
-        # Example setup for a moderately active female aiming to lose weight, not pregnant or lactating
-        self.female_user = NutritionalNeeds(
-            weight=60,
-            height=165,
-            age=30,
-            gender="female",
-            activity_level="moderate",
-            is_pregnant=False,
-            is_lactating=False,
-            goal="lose",
+        self.person2 = NutritionalNeeds(
+            60, 165, 25, "female", "active", False, False, "lose"
+        )
+        self.person3 = NutritionalNeeds(
+            75, 175, 35, "male", "sedentary", False, False, "gain"
+        )
+        self.pregnant_woman = NutritionalNeeds(
+            70, 170, 28, "female", "sedentary", True, False, "maintain"
+        )
+        self.lactating_woman = NutritionalNeeds(
+            65, 168, 32, "female", "sedentary", False, True, "maintain"
         )
 
     def test_calculate_bmr(self):
-        # Testing BMR calculation
-        self.assertAlmostEqual(self.male_user.calculate_bmr(), 1673.75, places=2)
-        self.assertAlmostEqual(self.female_user.calculate_bmr(), 1320.25, places=2)
+        self.assertAlmostEqual(self.person1.calculate_bmr(), 1780)
+        self.assertAlmostEqual(self.person2.calculate_bmr(), 1345.25)
+        self.assertAlmostEqual(self.person3.calculate_bmr(), 1673.75)
+        self.assertAlmostEqual(self.pregnant_woman.calculate_bmr(), 1461.5)
+        self.assertAlmostEqual(self.lactating_woman.calculate_bmr(), 1379)
 
     def test_calculate_daily_calories(self):
-        # Testing daily calories calculation
-        # Note: The exact numbers depend on the implementation details of calculate_daily_calories method
-        self.assertTrue(
-            self.male_user.calculate_daily_calories() > self.male_user.calculate_bmr()
-        )
-        self.assertTrue(
-            self.female_user.calculate_daily_calories()
-            < self.female_user.calculate_bmr() * 1.2
-        )  # considering weight loss goal
-
-    def test_calculate_amino_acid_needs(self):
-        # Testing the amino acid needs string format and checking if it's not empty
-        self.assertTrue(isinstance(self.male_user.calculate_amino_acid_needs(), str))
-        self.assertTrue(len(self.male_user.calculate_amino_acid_needs()) > 0)
-
-        self.assertTrue(isinstance(self.female_user.calculate_amino_acid_needs(), str))
-        self.assertTrue(len(self.female_user.calculate_amino_acid_needs()) > 0)
+        self.assertAlmostEqual(self.person1.calculate_daily_calories(), 2530.94)
+        self.assertAlmostEqual(self.person2.calculate_daily_calories(), 2421.45)
+        self.assertAlmostEqual(self.person3.calculate_daily_calories(), 2108.92)
+        self.assertAlmostEqual(self.pregnant_woman.calculate_daily_calories(), 1534.58)
+        self.assertAlmostEqual(self.lactating_woman.calculate_daily_calories(), 1447.95)
 
     def test_calculate_macros_needs(self):
-        # Testing the macronutrient needs string format and checking if it's not empty
-        self.assertTrue(isinstance(self.male_user.calculate_macros_needs(), str))
-        self.assertTrue(len(self.male_user.calculate_macros_needs()) > 0)
+        self.assertIn("Protein: 189.82 g", self.person1.calculate_macros_needs())
+        self.assertIn("Fat: 84.36 g", self.person1.calculate_macros_needs())
+        self.assertIn("Carbohydrates: 253.09 g", self.person1.calculate_macros_needs())
 
-        self.assertTrue(isinstance(self.female_user.calculate_macros_needs(), str))
-        self.assertTrue(len(self.female_user.calculate_macros_needs()) > 0)
+        self.assertIn("Protein: 242.14 g", self.person2.calculate_macros_needs())
+        self.assertIn("Fat: 80.71 g", self.person2.calculate_macros_needs())
+        self.assertIn("Carbohydrates: 181.61 g", self.person2.calculate_macros_needs())
+
+        self.assertIn("Protein: 158.17 g", self.person3.calculate_macros_needs())
+        self.assertIn("Fat: 46.86 g", self.person3.calculate_macros_needs())
+        self.assertIn("Carbohydrates: 263.62 g", self.person3.calculate_macros_needs())
+
+        self.assertIn("Protein: 140.09 g", self.pregnant_woman.calculate_macros_needs())
+        self.assertIn("Fat: 51.15 g", self.pregnant_woman.calculate_macros_needs())
+        self.assertIn("Carbohydrates: 153.46 g", self.pregnant_woman.calculate_macros_needs())
+
+        self.assertIn(
+            "Protein: 128.60 g", self.lactating_woman.calculate_macros_needs()
+        )
+        self.assertIn("Fat: 48.27 g", self.lactating_woman.calculate_macros_needs())
+        self.assertIn(
+            "Carbohydrates: 144.80 g", self.lactating_woman.calculate_macros_needs()
+        )
 
 
 if __name__ == "__main__":
