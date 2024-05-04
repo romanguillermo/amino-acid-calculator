@@ -21,6 +21,7 @@ class NutritionalNeeds:
 
         self.bmr = self.calculate_bmr()
         self.daily_calories = self.calculate_daily_calories()
+        self.bmi = self.calculate_bmi()
 
     def calculate_bmr(self):
         """Calculates the Basal Metabolic Rate (BMR) using the Mifflin-St Jeor Equation.
@@ -157,3 +158,25 @@ class NutritionalNeeds:
         macros_results += f"Fat: {fat_needs:.2f} g<br>"
         macros_results += f"Carbohydrates: {carb_needs:.2f} g<br>"
         return macros_results
+    
+    def calculate_bmi(self):
+        """
+        Calculates the Body Mass Index (BMI) based on weight (kg) and height (m).
+        Returns:
+            tuple: (BMI value, weight category)
+        """
+        height_meters = self.height / 100  # Convert height from cm to meters
+        bmi = self.weight / (height_meters ** 2)
+        bmi = round(bmi, 2)  # Round the BMI value to two decimal places
+
+        # Determine weight category based on BMI
+        if bmi < 18.5:
+            weight_category = "Underweight"
+        elif 18.5 <= bmi < 25:
+            weight_category = "Healthy weight"
+        elif 25 <= bmi < 30:
+            weight_category = "Overweight"
+        else:
+            weight_category = "Obese"
+
+        return bmi, weight_category

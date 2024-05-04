@@ -86,6 +86,13 @@
         <h1 class="title mb-4">Results</h1>
         <div class="card mb-3">
             <div class="card-body">
+                <h5 class="card-title">Body Mass Index (BMI)</h5>
+                <p class="card-text">Your BMI is {{ bmi }}, which falls into the <b>'{{ weight_category }}'</b> category.</p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
                 <h5 class="card-title">Daily Calorie Needs</h5>
                 <p class="card-text">{{ total_daily_calories }} cal</p>
             </div>
@@ -104,7 +111,6 @@
                 <p class="card-text">{{ amino_acid_results|safe }}</p>
             </div>
         </div>
-
         <div class="d-flex justify-content-center">
         <a href="{{ url_for('index') }}" class="btn btn-outline-light back-button">Back to form</a>
         </div>
