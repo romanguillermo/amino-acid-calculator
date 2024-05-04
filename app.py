@@ -1,5 +1,7 @@
 # To do:
-#
+# Add more details to results
+# Ideal weight?
+# BMI
 
 from flask import Flask, render_template, request, redirect, url_for
 from NeedsFormula import *
@@ -34,7 +36,7 @@ def calculate():
 
     # Convert weight to kilograms for calculations if not already
     if weight_unit == "lb":
-        weight = weight * 0.453592
+        weight_in_kg = weight * 0.453592
 
     # Convert height from feet&inches to centimeters
     height = ((height_feet * 12) + height_inches) * 2.54
@@ -51,16 +53,30 @@ def calculate():
         is_lactating = True
 
     # Calculations using NeedsFormula NeedsCalculator
-    needs = NutritionalNeeds(weight, height, age, gender, activity_level, is_pregnant, is_lactating, goal)
+    needs = NutritionalNeeds(weight_in_kg, height, age, gender, activity_level, is_pregnant, is_lactating, goal)
     total_daily_calories = needs.calculate_daily_calories()
     macros_needs = needs.calculate_macros_needs()
     amino_acid_results = needs.calculate_amino_acid_needs()
+
+    # User data for results page recalculate form
+    user_data = {
+        "age": age,
+        "weight": weight,
+        "weight_unit": weight_unit,
+        "height_feet": height_feet,
+        "height_inches": height_inches,
+        "gender": gender,
+        "activity_level": activity_level,
+        "pregnancy_status": pregnancy_status,
+        "goal": goal,
+    }
 
     return render_template(
         "results.html",
         total_daily_calories=total_daily_calories,
         macros_needs=macros_needs,
         amino_acid_results=amino_acid_results,
+        user_data=user_data,
     )  # Renders results page based on input
 
 

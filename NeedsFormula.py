@@ -1,6 +1,15 @@
-
 class NutritionalNeeds:
-    def __init__(self,weight,height,age,gender,activity_level,is_pregnant,is_lactating,goal):
+    def __init__(
+        self,
+        weight,
+        height,
+        age,
+        gender,
+        activity_level,
+        is_pregnant,
+        is_lactating,
+        goal,
+    ):
         self.weight = weight
         self.height = height
         self.age = age
@@ -26,7 +35,7 @@ class NutritionalNeeds:
         """Calculate daily calories based on workout parameters and goal.
         Returns: Total daily calories (g) rounded to 2 dec places
         """
-        #workout_days, workout_duration, met_value = 0, 0, 1.2  # Defaults for Sedentary
+        # workout_days, workout_duration, met_value = 0, 0, 1.2  # Defaults for Sedentary
         if self.activity_level == "sedentary":
             workout_days, workout_duration, met_value = 0, 0, 1.2
         elif self.activity_level == "moderate":
@@ -39,7 +48,7 @@ class NutritionalNeeds:
         )
         daily_calories = self.bmr + daily_calorie_adjustment
         if self.activity_level == "sedentary":
-            daily_calorie_adjustment = (self.bmr / 24 * met_value)
+            daily_calorie_adjustment = self.bmr / 24 * met_value
             daily_calories = self.bmr + daily_calorie_adjustment
 
         # Adjust calorie intake based on goal
@@ -48,7 +57,7 @@ class NutritionalNeeds:
         elif self.goal == "gain":
             daily_calories = daily_calories * 1.2  # Increase calories by 20%
         else:
-            daily_calories = daily_calories # Maintain calories
+            daily_calories = daily_calories  # Maintain calories
 
         return round(daily_calories, 2)
 
@@ -86,6 +95,7 @@ class NutritionalNeeds:
                 "Hydroxyproline": 4.29,
                 "Ornithine": 85.71,
                 "Serine": 57.14,
+                "Theanine": 2.3,
             },
         }
 
