@@ -32,7 +32,12 @@
                 <p class="card-text">{{ amino_acid_results|safe }}</p>
             </div>
         </div>
-
+        <div class="card mb-4 bmi-card">
+            <div class="card-body">
+                <h5 class="card-title">Body Mass Index (BMI)</h5>
+                <p class="card-text">Your BMI is {{ bmi }}, which falls into the '{{ weight_category }}' category.</p>
+            </div>
+        </div>
         <div class="d-flex justify-content-center">
         <a href="{{ url_for('index') }}" class="btn btn-outline-light back-button">Back to form</a>
         </div>

@@ -55,12 +55,20 @@ def calculate():
     total_daily_calories = needs.calculate_daily_calories()
     macros_needs = needs.calculate_macros_needs()
     amino_acid_results = needs.calculate_amino_acid_needs()
+    bmi, weight_category = needs.calculate_bmi()  # Unpack the return value
+
+    print(f"BMI: {bmi}")
+    print(f"Weight Category: {weight_category}")
 
     return render_template(
         "results.html",
         total_daily_calories=total_daily_calories,
         macros_needs=macros_needs,
         amino_acid_results=amino_acid_results,
+        bmi=bmi,  
+        weight_category=weight_category,  # Pass weight category to the template
+
+
     )  # Renders results page based on input
 
 

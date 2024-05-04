@@ -29,3 +29,14 @@ body {
     border: 2px solid #fff; 
     background-color: #1e1e1e;
 }
+
+.card {
+    display: block; /* making sure the card is displayed */
+    opacity: 1; 
+    visibility: visible; /* making sure the card is visible */
+  }
+  .bmi-card .card-text {
+    display: block !important; /* just for bmi card */
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
