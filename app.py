@@ -1,7 +1,4 @@
 # To do:
-# Add more details to results
-# Ideal weight?
-# BMI
 
 from flask import Flask, render_template, request, redirect, url_for
 from NeedsFormula import *

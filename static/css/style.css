@@ -25,27 +25,42 @@ body {
     max-width: 900px;
 }
 
+.recalculate {
+    padding-bottom: 1rem;
+    background-color: #121212;
+}
+
+#stats-header {
+    text-align: center;
+}
+
+.recalc-btn {
+    
+}
+
 .card {
     border: 2px solid #fff; 
     background-color: #1e1e1e;
 }
 
-.recalculate {
-    border: 2px dashed #fff;
-    border-radius: 0.5rem;
-    padding: 1rem 1.5rem;
-    background-color: #000;
-
+.card-title {
+    border-bottom: 1px solid #fff;
+    padding-left: 0;
+    padding-bottom: 0.5rem;
+    margin-left: 15px;
 }
 
-#stats-header {
-    text-align: center;
-    border-bottom: 2px solid #fff;
+.description-text-box {
+    border-left: 1px dashed #fff;
+}
+
+.description-text {
+    font-size: 0.7rem;
 }
 
 .flex-row {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .flex-grow-1 {
@@ -58,6 +73,10 @@ body {
 
 .height-input {
     flex-wrap: nowrap;
+}
+
+.age-left {
+    padding-left: 0;
 }
 
 .age-input {
@@ -73,9 +92,4 @@ body {
 #weight-input {
     height: 22px;
     width: 60px;
-}
-
-.recalc-btn {
-    padding-top: 1rem;
-    margin: auto;
 }

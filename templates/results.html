@@ -6,16 +6,16 @@
     <title>Nutrition Results</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d360d11703.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container my-5">
 
         <!--Recalculate bar-->
-        <form action="{{ url_for('calculate') }}" method="post" class="container mb-4 recalculate">
-            <h3 id="stats-header">Your stats</h3>
+        <form action="{{ url_for('calculate') }}" method="post" class="container mb-5 recalculate">
             <div class="row flex-row">
-                <div class="col-auto flex-grow-1">
+                <div class="col-auto flex-grow-1 age-left">
                     <label for="age">Age</label>
                     <input type="number" id="age" name="age" class="form-control form-control-sm age-input" value="{{ user_data['age'] }}" required>
                 </div>
@@ -76,9 +76,7 @@
                         <option value="gain" {% if user_data['goal'] == 'gain' %}selected{% endif %}>Gain weight</option>
                     </select>
                 </div>
-                <div class="col-auto recalc-btn">
-                    <button type="submit" class="btn btn-outline-light">Recalculate</button>
-                </div>
+                <button type="submit" class="btn btn-outline-light btn-sm"><i class="fa-solid fa-arrows-rotate"></i></button>
             </div>
         </form>
 
@@ -86,29 +84,96 @@
         <h1 class="title mb-4">Results</h1>
         <div class="card mb-3">
             <div class="card-body">
-                <h5 class="card-title">Body Mass Index (BMI)</h5>
-                <p class="card-text">Your BMI is {{ bmi }}, which falls into the <b>'{{ weight_category }}'</b> category.</p>
+                <div class="row">
+                    <h5 class="card-title col">Body Mass Index (BMI)</h5>
+                </div>
+                <div class="row">
+                    <div class="col-6 results-text">
+                        <p class="card-text">{{ bmi }}</p>
+                    </div>
+                    <div class="col-6 description-text-box">
+                        <p class="description-text">Your BMI falls into the <b>{{ weight_category }}</b> category.<br><br>Body Mass Index (BMI) is a numerical value of your weight in relation to your height. It's an indicator of whether a person has a healthy body weight for a person of their height.</p>
+                        
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="card mb-3">
             <div class="card-body">
-                <h5 class="card-title">Daily Calorie Needs</h5>
-                <p class="card-text">{{ total_daily_calories }} cal</p>
+                <div class="row">
+                    <h5 class="card-title col">Daily Calorie Needs</h5>
+                </div>
+                <div class="row">
+                    <div class="col-6 results-text">
+                        <p class="card-text">{{ total_daily_calories }} cal</p>
+                    </div>
+                    <div class="col-6 description-text-box">
+                        <p class="description-text">The number of calories you need to {{ user_data['goal'] }} your current weight.</p>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="card mb-3">
             <div class="card-body">
-                <h5 class="card-title">Macronutrient Needs</h5>
-                <p class="card-text">{{ macros_needs|safe }}</p>
+                <div class="row">
+                    <h5 class="card-title col">Macronutrient Needs</h5>
+                </div>
+                <div class="row">
+                    <div class="col-6 results-text">
+                        <p class="card-text">{{ macros_needs|safe }}</p>
+                    </div>
+                    <div class="col-6 description-text-box">
+                        <p class="description-text">Macronutrients are the nutrients your body needs in large amounts: carbohydrates, proteins, and fats.
+                        <br>The typical macronutrient distribution range recommended for a balanced diet is 45-65% carbohydrates, 10-35% protein, and 20-35% fats.</p>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="card mb-4">
             <div class="card-body">
-                <h5 class="card-title">Amino Acid Needs</h5>
-                <p class="card-text">{{ amino_acid_results|safe }}</p>
+                <div class="row">
+                    <h5 class="card-title col">Amino Acid Needs</h5>
+                </div>
+                <div class="row">
+                    <div class="col-6 results-text">
+                        <p class="card-text">{{ amino_acid_results|safe }}</p>
+                    </div>
+                    <div class="col-6 description-text-box">
+                        <p class="description-text">
+                            <b>Essential Amino Acids</b><br>Cannot be made by the body and must be obtained through diet.<br>
+                            <br><b>Histidine</b> is used for growth and creating blood cells.<br>
+                            <br><b>Isoleucine</b>, a branched-chain amino acid, aids muscle repair and energy regulation.<br>
+                            <br><b>Leucine</b> stimulates muscle protein synthesis.<br>
+                            <br><b>Methionine</b> serves as a building block for other amino acids and has antioxidant properties.<br>
+                            <br><b>Phenylalanine</b> is necessary for neurotransmitter production.<br>
+                            <br><b>Threonine</b> is important for metabolism and protein balance.<br>
+                            <br><b>Tryptophan</b> helps regulate sleep, mood, and appetite.<br>
+                            <br><b>Valine</b> stimulates muscle growth and energy provision.<br>
+
+                            <br><b>Conditional Amino Acids</b><br>Usually not essential, except in times of illness and stress.<br>
+                            <br><b>Arginine</b> is involved in wound healing and detoxification.<br>
+                            <br><b>N-Acetyl Cysteine (NAC)</b> has antioxidant properties and replenishes glutathione.<br>
+                            <br><b>Glycine</b> is involved in the synthesis of other amino acids.<br>
+                            <br><b>Proline</b> plays a role in protein synthesis and structure.<br>
+                            <br><b>Tyrosine</b> is a precursor to several important neurotransmitters.<br>
+
+                            <br><b>Non-Essential Amino Acids</b><br>Can be synthesized by the human body and do not need to be obtained directly through the diet.<br>
+                            <br><b>Beta-Alanine</b> is used in the synthesis of carnosine, which helps buffer acid in muscles.<br>
+                            <br><b>Asparagine</b> plays a role in the biosynthesis of glycoproteins.<br>
+                            <br><b>D-Aspartic acid</b> is involved in testosterone synthesis and nervous system function.<br>
+                            <br><b>Betaine</b> supports liver function and cellular reproduction.<br>
+                            <br><b>Glutamic acid</b> is a neurotransmitter important for learning and memory.<br>
+                            <br><b>Glutamine</b> is abundant in the bloodstream and supports immune function.<br>
+                            <br><b>Hydroxyproline</b> is important for collagen stability.<br>
+                            <br><b>Ornithine</b> plays a role in the urea cycle.<br>
+                            <br><b>Serine</b> is involved in protein biosynthesis.<br>
+                            <br><b>Theanine</b> influences brain function and promotes relaxation.<br>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="d-flex justify-content-center">
