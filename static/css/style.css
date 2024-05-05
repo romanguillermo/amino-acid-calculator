@@ -60,7 +60,7 @@ body {
 
 .flex-row {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 }
 
 .flex-grow-1 {
