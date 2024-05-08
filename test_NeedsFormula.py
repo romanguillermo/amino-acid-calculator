@@ -21,12 +21,12 @@ class TestNutritionalNeeds(unittest.TestCase):
             65, 168, 32, "female", "sedentary", False, True, "maintain"
         )
 
-    def test_calculate_bmr(self):
-        self.assertAlmostEqual(self.person1.calculate_bmr(), 1780)
-        self.assertAlmostEqual(self.person2.calculate_bmr(), 1345.25)
-        self.assertAlmostEqual(self.person3.calculate_bmr(), 1673.75)
-        self.assertAlmostEqual(self.pregnant_woman.calculate_bmr(), 1461.5)
-        self.assertAlmostEqual(self.lactating_woman.calculate_bmr(), 1379)
+    def test_calculate_bmi(self):
+        self.assertAlmostEqual(self.person1.calculate_bmi()[0], 24.69, places=2)
+        self.assertAlmostEqual(self.person2.calculate_bmi()[0], 22.04, places=2)
+        self.assertAlmostEqual(self.person3.calculate_bmi()[0], 24.49, places=2)
+        self.assertAlmostEqual(self.pregnant_woman.calculate_bmi()[0], 24.22, places=2)
+        self.assertAlmostEqual(self.lactating_woman.calculate_bmi()[0], 23.03, places=2)
 
     def test_calculate_daily_calories(self):
         self.assertAlmostEqual(self.person1.calculate_daily_calories(), 2530.94)
@@ -50,7 +50,9 @@ class TestNutritionalNeeds(unittest.TestCase):
 
         self.assertIn("Protein: 140.09 g", self.pregnant_woman.calculate_macros_needs())
         self.assertIn("Fat: 51.15 g", self.pregnant_woman.calculate_macros_needs())
-        self.assertIn("Carbohydrates: 153.46 g", self.pregnant_woman.calculate_macros_needs())
+        self.assertIn(
+            "Carbohydrates: 153.46 g", self.pregnant_woman.calculate_macros_needs()
+        )
 
         self.assertIn(
             "Protein: 128.60 g", self.lactating_woman.calculate_macros_needs()
