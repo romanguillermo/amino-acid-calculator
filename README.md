@@ -4,6 +4,7 @@ This is a Flask-based web application that calculates daily nutritional needs ba
 
 ## Features
 
+- Calculates BMI score
 - Calculates daily calorie needs
 - Calculates macronutrient needs
 - Calculates amino acid needs
