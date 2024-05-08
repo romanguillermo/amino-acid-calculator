@@ -10,12 +10,12 @@
     <script src="https://kit.fontawesome.com/d360d11703.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container my-5">
+    <div class="container mb-5">
 
         <!--Recalculate bar-->
-        <form action="{{ url_for('calculate') }}" method="post" class="container mb-5 recalculate">
-            <div class="row flex-row">
-                <div class="col-auto flex-grow-1 age-left">
+        <form action="{{ url_for('calculate') }}" method="post" class="container my-5 recalculate">
+            <div class="row">
+                <div class="col-auto flex-grow-1">
                     <label for="age">Age</label>
                     <input type="number" id="age" name="age" class="form-control form-control-sm age-input" value="{{ user_data['age'] }}" required>
                 </div>
@@ -76,7 +76,7 @@
                         <option value="gain" {% if user_data['goal'] == 'gain' %}selected{% endif %}>Gain weight</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-outline-light btn-sm"><i class="fa-solid fa-arrows-rotate"></i></button>
+                <button type="submit" class="recalc-btn btn btn-outline-light">Recalculate</button>
             </div>
         </form>
 
