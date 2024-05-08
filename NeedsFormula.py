@@ -173,7 +173,7 @@ class NutritionalNeeds:
         if bmi < 18.5:
             weight_category = "Underweight"
         elif 18.5 <= bmi < 25:
-            weight_category = "Healthy weight"
+            weight_category = "Normal weight"
         elif 25 <= bmi < 30:
             weight_category = "Overweight"
         else:
